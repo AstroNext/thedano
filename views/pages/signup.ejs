@@ -1,0 +1,30 @@
+<div class="flex justify-center items-center">
+    <div class="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
+        <h1 class="text-2xl font-bold text-center">Sign up</h1>
+        <form novalidate="" action="/signup" method="post" class="space-y-6">
+            <div class="space-y-1 text-sm">
+                <label for="username" class="block dark:text-gray-400">Username</label>
+                <input type="text" name="username" required id="username" placeholder="Email or Phonenumber" class="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400">
+                <% if(typeof errors != "undefined" && typeof errors['username'] != "undefined") { %>
+                    <label for="username" class="block dark:text-red-400"><%= errors['username'] %> </label>
+                <% } %>
+            </div>
+            <div class="space-y-1 text-sm">
+                <label for="password" class="block dark:text-gray-400">Password</label>
+                <input type="password" name="password" required min="5"  id="password" placeholder="Password" class="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400">
+                <% if(typeof errors != "undefined" && typeof errors['password'] != "undefined") { %>
+                    <label for="password" class="block dark:text-red-400"><%= errors['password'] %> </label>
+                <% } %>
+            </div>
+            <div class="space-y-1 text-sm">
+                <label for="repassword" class="block dark:text-gray-400">Repeat Password</label>
+                <input type="password" name="repassword" required min="5" id="repassword" placeholder="Repeat Password" class="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400">
+                <% if(typeof errors != "undefined" && typeof errors['repassword'] != "undefined") { %>
+                    <label for="repassword" class="block dark:text-red-400"><%= errors['repassword'] %> </label>
+                <% } %>
+            </div>
+            <button class="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400" type="submit">Create</button>
+        </form>
+    </div>
+</div>
+

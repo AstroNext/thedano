@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= page.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/output.css' />
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="/javascripts/index.js"></script>
+  </head>
+  <body class="flex flex-col h-screen justify-between dark:bg-gray-950">
+    <%- include('../views/partials/header'); %>
+    <%- include(page.render); %>
+    <%- include('../views/partials/footer'); %>
+  </body>
+</html>
