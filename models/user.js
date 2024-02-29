@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
 
 const Schema = mongoose.Schema;
 
@@ -26,6 +27,19 @@ userSchema.statics.add = async function({ inputEmail, inputPhonenumber, inputPas
     return await user.save();
 };
 
+userSchema.statics.byToken = async function({ token }) {
+    var user = await this.findOne({ token: token });
+    if (user) {
+        if (Date.now() + 3600000 > user.tokenExpiration) {
+            return [true, user];
+        } else {
+            return [false, false];
+        }
+    } else {
+        return [false, false];
+    }
+};
+
 userSchema.statics.login = async function({ username, password }) {
     var user = await this.findOne({ email: username }) ? await this.findOne({ email: username }) : await this.findOne({ phonenumber: username });
     if (user) {
@@ -34,6 +48,13 @@ userSchema.statics.login = async function({ username, password }) {
         return [false, false, "Email/Phonenumber is invalid!"];
     }
 };
+
+userSchema.statics.generateToken = async function({ email, phonenumber }) {
+    var user = await this.findOne({ email: email }) ? await this.findOne({ email: email }) : await this.findOne({ phonenumber: phonenumber });
+    user.token = uuidv4();
+    user.tokenExpiration = Date.now() + 3600000;
+    return [user.save(), user.token];
+}
 
 userSchema.methods.changePassword = async function({ token, oldPassword, newPassword }) {
     var user = this.findOne({ token });
