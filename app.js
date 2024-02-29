@@ -27,8 +27,8 @@ app.set('view engine', 'ejs');
 // page configration
 app.set('home', { render: '../views/pages/home', title: 'Home'});
 app.set('product', { render: '../views/pages/product', title: 'Product'});
-app.set('dashboard', { render: '../views/pages/dashboard', panel: '../dashboard/main', title: 'Dashboard'});
-app.set('orders', { render: '../views/pages/dashboard', panel: '../dashboard/orders', title: 'Orders'});
+app.set('dashboard', { render: '../views/pages/dashboard', panel: '../panels/main', title: 'Dashboard'});
+app.set('orders', { render: '../views/pages/dashboard', panel: '../panels/orders', title: 'Orders'});
 app.set('login', { render: '../views/pages/login', title: 'Login'});
 app.set('signup', { render: '../views/pages/signup', title: 'Sign up'});
 app.set('admin', { render: '../views/pages/admin', title: 'Admin'});
