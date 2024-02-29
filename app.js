@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 
+var authMiddleware = require('./middlewares/isAuth');
+
 var indexRouter = require('./routes/home');
 var productRouter = require('./routes/product');
 var loginRouter = require('./routes/login');
@@ -40,21 +42,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/home', indexRouter);
-app.use('/product', productRouter);
-app.use('/login', loginRouter);
-app.use('/signup', signupRouter);
-app.use('/admin', adminRouter);
-app.use('/users', usersRouter);
+app.use(authMiddleware);
 
-app.use((req, res, next) => {
-  // locals allows to access variables inside views
-  res.locals.isAuthenticated = req.session.isLoggedIn ? req.session.isLoggedIn : false;
-  console.log(res.locals.isAuthenticated, req.session.isLoggedIn)
-  // res.locals.csrfToken = req.csrfToken();
-  next();
-});
+app.use(indexRouter);
+app.use(productRouter);
+app.use(loginRouter);
+app.use(signupRouter);
+app.use(adminRouter);
+// app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next){
