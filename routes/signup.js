@@ -4,11 +4,11 @@ const User = require('../models/user');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/signup', function(req, res, next) {
   res.render('signup', {});
 });
 
-router.post('/', 
+router.post('/signup', 
   body('username').isEmail().withMessage('Not a valid e-mail address'), 
   body('password').notEmpty().isLength({min : 5}).withMessage('Not a valid password'),
   body('repassword').custom((value, {req}) => { return value === req.body.password; }).withMessage('Not match with password'), 
