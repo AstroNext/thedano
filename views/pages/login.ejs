@@ -18,9 +18,13 @@
                 <% if(typeof errors != "undefined" && typeof errors['password'] != "undefined") { %>
                     <label for="password" class="block dark:text-red-400"><%= errors['password'] %> </label>
                 <% } %>
-                <div class="flex justify-end text-xs dark:text-gray-400">
-                    <a rel="noopener noreferrer" href="#">Forgot Password?</a>
+            </div>
+            <div class="flex justify-between">
+                <div class="flex items-center">
+                    <input type="checkbox" name="remember" id="remember" aria-label="Remember me" class="mr-1 rounded-sm focus:ri focus:dark:border-default-400 focus:ri dark:accent-default-400">
+                    <label for="remember" class="text-sm dark:text-gray-400">Remember me</label>
                 </div>
+                <a class="text-sm dark:text-gray-400" href="#">Forgot your password?</a>
             </div>
             <button class="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400" type="submit">Sign in</button>
         </form>
