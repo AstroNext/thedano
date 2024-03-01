@@ -13,7 +13,7 @@ const addressSchema = new Schema({
     date: { type: Schema.Types.Date, default: Date.now }
 });
 
-addressSchema.statics.Add = async function(userToken, inputState, inputCity, inputAddress, inputPlaqe, inputPostcode, inputUnit){
+addressSchema.statics.add = async function({userToken, inputState, inputCity, inputAddress, inputPlaqe, inputPostcode, inputUnit}){
     var user = await User.findOne({ token: userToken });
     if (user) {
         var address = await this.create({ 
@@ -70,5 +70,9 @@ addressSchema.statics.Edit = async function(addressId, inputState, inputCity, in
         return [ false, 'Address not found' ];
     }
 };
+
+addressSchema.statics.get = async function({ token }){
+    return this.find({'userId.token' : token}).populate('userId').exec();
+}
 
 module.exports = mongoose.model("Address", addressSchema);
