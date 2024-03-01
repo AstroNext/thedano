@@ -11,7 +11,6 @@ var indexRouter = require('./routes/home');
 var productRouter = require('./routes/product');
 var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/login');
-var signupRouter = require('./routes/signup');
 var adminRouter = require('./routes/admin');
 
 var app = express();
@@ -24,12 +23,12 @@ app.set('view engine', 'ejs');
 // page configration
 app.set('home', { render: '../views/pages/home', title: 'Home'});
 app.set('product', { render: '../views/pages/product', title: 'Product'});
-app.set('dashboard', { render: '../views/pages/dashboard', panel: '../panels/main', title: 'Dashboard - Main'});
-app.set('addresses', { render: '../views/pages/dashboard', panel: '../panels/Addresses', title: 'Dashboard - Addresses'});
-app.set('orders', { render: '../views/pages/dashboard', panel: '../panels/orders', title: 'Dashboard - Orders'});
-app.set('cart', { render: '../views/pages/dashboard', panel: '../panels/carts', title: 'Dashboard - Cart'});
-app.set('wishlist', { render: '../views/pages/dashboard', panel: '../panels/wishlist', title: 'Dashboard - Wishlist'});
-app.set('setting', { render: '../views/pages/dashboard', panel: '../panels/setting', title: 'Dashboard - Setting'});
+app.set('dashboard', { render: '../views/pages/dashboard', interface: '../interfaces/main', title: 'Dashboard - Main'});
+app.set('addresses', { render: '../views/pages/dashboard', interface: '../interfaces/Addresses', title: 'Dashboard - Addresses'});
+app.set('orders', { render: '../views/pages/dashboard', interface: '../interfaces/orders', title: 'Dashboard - Orders'});
+app.set('cart', { render: '../views/pages/dashboard', interface: '../interfaces/carts', title: 'Dashboard - Cart'});
+app.set('wishlist', { render: '../views/pages/dashboard', interface: '../interfaces/wishlist', title: 'Dashboard - Wishlist'});
+app.set('setting', { render: '../views/pages/dashboard', interface: '../interfaces/setting', title: 'Dashboard - Setting'});
 app.set('login', { render: '../views/pages/login', title: 'Login'});
 app.set('signup', { render: '../views/pages/signup', title: 'Sign up'});
 app.set('admin', { render: '../views/pages/admin', title: 'Admin'});
@@ -51,7 +50,6 @@ app.use(indexRouter);
 app.use(productRouter);
 app.use(dashboardRouter);
 app.use(loginRouter);
-app.use(signupRouter);
 app.use(adminRouter);
 
 // catch 404 and forward to error handler
